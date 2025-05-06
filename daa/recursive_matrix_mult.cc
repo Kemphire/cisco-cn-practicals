@@ -22,16 +22,6 @@ public:
     delete[] mat;
   }
 
-  Matrix(const Matrix &other) : size(other.size) {
-    mat = new int *[size];
-    for (int i = 0; i < size; i++) {
-      mat[i] = new int[size];
-      for (int j = 0; j < size; j++) {
-        mat[i][j] = other.mat[i][j];
-      }
-    }
-  }
-
   Matrix operator+(const Matrix &B) const {
     Matrix result(size);
     for (int i = 0; i < size; i++) {

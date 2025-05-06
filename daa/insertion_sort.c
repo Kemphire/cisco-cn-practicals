@@ -12,7 +12,7 @@ void sort(int *arr, int n) {
       arr[j + 1] = arr[j];
       j--;
     }
-    if (j < 0)
+    if (j >= 0)
       no_of_comp++;
     arr[j + 1] = key;
   }

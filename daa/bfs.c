@@ -70,14 +70,6 @@ void pushback_queue(int **q, int *size, int value) {
   ++(*size);
 }
 
-bool is_visited(int *res, int vertex, int size_of_res) {
-  for (int i = 0; i < size_of_res; i++) {
-    if (res[i] == vertex)
-      return true;
-  }
-  return false;
-}
-
 void bfs(Graph *graph) {
   int source = 0;
   int num_vertices = graph->num_vertices;

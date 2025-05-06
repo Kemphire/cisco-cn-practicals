@@ -59,7 +59,7 @@ void heap_sort(Heap *heap) {
 }
 
 int main(void) {
-  int arr[] = {-1, 0, 293, 7, 1};
+  int arr[] = {-1, 0, 293, 7, -5, 1};
   int size = sizeof(arr) / sizeof(arr[0]);
   Heap heap = {.arr = arr, .n = size, .heap_size = size};
 
