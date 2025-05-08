@@ -1,0 +1,49 @@
+﻿Ques 1
+
+
+SELECT DISTINCT student_name FROM Student WHERE roll_no IN (SELECT roll_no FROM Enrollment);
+
+
+  
+
+
+
+Ques 2
+
+
+SELECT soc_name FROM Society;
+
+
+  
+
+
+
+Ques 3
+
+
+SELECT student_name FROM Student WHERE student_name LIKE “A%”;
+
+
+  
+
+
+
+Ques 4
+
+
+SELECT *
+FROM Student s
+INNER JOIN Enrollment e ON e.roll_no = s.roll_no
+INNER JOIN Society so ON so.soc_id = e.sid
+WHERE Student.roll_no IN ("com scie","chem")
+
+
+  
+
+
+
+Ques 5
+
+
+SELECT student_name FROM Student 
+WHERE roll_no LIKE "X%" OR roll_no LIKE "Z%" AND roll_no LIKE "%9";

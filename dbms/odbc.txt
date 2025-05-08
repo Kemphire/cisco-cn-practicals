@@ -1,0 +1,67 @@
+import mysql.connector
+from main import Tablify
+
+arguments = {
+    "db": "practicals",
+    "host": "localhost",
+    "port": 3306,
+    "password": "Kartikey02@",
+    "user": "hitmonlee",
+}
+
+
+with mysql.connector.connect(**arguments) as cnx:
+    cur = cnx.cursor()
+
+    cur.execute("select * from Student")
+
+    rows = cur.fetchall()
+
+    Tablify(
+        "Student Table",
+        cols=["Roll No", "Name", "Subject", "Date of Enrollment", "Mob No"],
+        rows=rows,
+    )
+
+
+with mysql.connector.CMySQLConnection(**arguments) as cnx:
+    cur = cnx.cursor()
+
+    cur.execute("select * from Student")
+
+    rows = cur.fetchall()
+
+    Tablify(
+        "Student Table",
+        cols=["Roll No", "Name", "Subject", "Date of Enrollment", "Mob No"],
+        rows=rows,
+    )
+
+with mysql.connector.CMySQLConnection() as cnx:
+    cnx.connect(**arguments)
+    cur = cnx.cursor()
+
+    cur.execute("select * from Student")
+
+    rows = cur.fetchall()
+
+    Tablify(
+        "Student Table",
+        cols=["Roll No", "Name", "Subject", "Date of Enrollment", "Mob No"],
+        rows=rows,
+    )
+
+with mysql.connector.CMySQLConnection() as cnx:
+    cnx.config(**arguments)
+    cnx.connect()
+    cur = cnx.cursor()
+
+    cur.execute("select * from Student")
+
+    rows = cur.fetchall()
+
+    Tablify(
+        "Student Table",
+        cols=["Roll No", "Name", "Subject", "Date of Enrollment", "Mob No"],
+        rows=rows,
+    )

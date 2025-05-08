@@ -1,0 +1,45 @@
+﻿II
+Ques 1> Create User
+
+
+CREATE USER ‘kartikey23558’@’localhost’ IDENTIFIED BY ‘Kartikey02@’
+
+
+  
+
+
+
+Ques 2> create role
+
+
+CREATE ROLE r1;
+
+
+  
+
+
+
+Ques 3> grant privileges to a role
+
+
+GRANT ALL PRIVILLAGES on practicals.* TO r1;
+
+
+
+
+
+
+Ques 4> Revoke Privileges for role
+
+
+REVOKE ALL PRIVILEGES ON practicals.* FROM r1
+
+
+  
+
+
+
+Ques 5> CREATE INDEX
+
+
+CREATE INDEX idx_student_name ON Student(student_name);

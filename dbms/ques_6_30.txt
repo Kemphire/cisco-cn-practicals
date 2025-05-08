@@ -1,0 +1,380 @@
+﻿Ques 7
+
+Update Society set mentor_name = "NKN" Where soc_name = "Eco Club";
+
+
+  
+
+
+
+Ques 8
+
+
+Select soc_name
+From Society 
+Where soc_id 
+in (
+Select sid 
+From Enrollment
+Group by sid
+Having count(sid) > 5);
+
+
+  
+
+
+
+Ques 9
+
+
+select s.student_name
+From Student s, Enrollment e
+Where s.roll_no = e.roll_no and e.sid = (select soc_id From Society Where soc_name = “NSS”) and s.dob = (select Min(dob) from Student);
+
+
+  
+
+
+
+Ques 10
+
+
+select s.soc_name
+From Soceity
+Join Enrollment e on e.sid = s.soc_id
+Group by s.soc_name
+Order by count(s.sid);
+
+
+  
+
+
+
+Ques 11
+
+
+select s.soc_name
+From Soceity
+Join Enrollment e on e.sid = s.soc_id
+Group by s.soc_name
+Order by count(s.sid)
+Limit 2;
+
+
+  
+
+
+
+Ques 12
+
+
+Select student_name
+From Student
+Where roll_no not in (select roll_no From Enrollment);
+
+
+  
+
+
+
+Ques 13
+
+
+select student_name
+From Student
+Where roll_no in (
+select roll_no
+From Enrollment
+Group by (roll_no)
+having count(roll_no) >= 2);
+
+
+  
+
+
+
+Ques 14
+
+
+select soc_name
+From Society
+where soc_id = (
+Select sid
+From Enrollment
+Group by sid
+order by count(sid) desc 
+Limit 1);
+
+
+  
+
+
+
+Ques 16
+
+
+Select student_name
+From Student
+Where roll_no in (
+select roll_no From Enrollment Where sid in (
+select soc_id From Society Where soc_name in (“Detabing”, “Dancing”, “Shashkt”)));
+
+
+  
+
+
+
+
+
+Ques 17
+
+
+select soc_name
+From Soceity
+Where mentor_name Like “%Gupta%”
+
+
+  
+
+
+
+Ques 18
+
+
+select s.soc_name,count(sid) as enrolled, s.total_seats
+From Society as s
+Left Join Enrollment on sid=s.soc_id
+Group by s.soc_name, sid
+having enrolled = (s.total_seats / 10)
+
+
+  
+
+
+
+Ques 19
+
+
+SELECT
+        soc_name,
+        (total_seats - count(e.sid)) AS Vacant_Seats
+FROM
+        Society AS s
+        LEFT JOIN Enrollment AS e ON e.sid = s.soc_id
+GROUP BY
+        e.sid
+
+
+  
+
+
+
+Ques 20
+
+
+Before increment
+
+
+  
+
+
+
+
+
+After increment
+
+
+  
+
+
+
+update Society
+set total_seats = total_seats + (total_seats / 10);
+
+
+Ques 21
+
+
+ALTER TABLE
+        Enrollment
+ADD
+        COLUMN fees_paid VARCHAR(3) NOT NULL DEFAULT 'no',
+ADD
+        CONSTRAINT fees_paid_check CHECK (
+            fees_paid = 'no'
+            OR fees_paid = "yes"
+        )
+
+
+
+
+  
+
+
+
+Ques 22
+
+
+UPDATE
+        Enrollment
+SET
+        date_of_enrollment = 2018 -01 -15
+WHERE
+        sid = "s1"
+
+
+—------------------------------------
+
+
+UPDATE
+        Enrollment
+SET
+        date_of_enrollment = CURDATE()
+WHERE
+        sid = "s2"
+
+
+—--------------------------------------
+
+
+UPDATE
+        Enrollment
+SET
+        date_of_enrollment = 2018-01-02
+WHERE
+        sid = "s3"
+
+
+Ques 23
+
+
+CREATE View as soc_name_total_students
+Select s.soc_name, count(e.sid) as total_students
+From Society s
+Left Join Enrollment e on e.sid = s.soc_id
+Group by e.sid, s.soc_name
+
+
+  
+
+
+
+Ques 24
+
+
+SELECT
+        student_name
+FROM
+        Student
+WHERE
+        roll_no IN (
+            SELECT
+                roll_no
+            FROM
+                Enrollment
+            GROUP BY
+                roll_no
+            HAVING
+                count(roll_no) = (
+                    SELECT
+                        count(*)
+                    FROM
+                        Society
+                )
+        )
+
+
+  
+
+
+
+Ques 25
+
+
+select soc_name From soc_name_total_students where total_students > 5
+
+
+  
+
+
+
+Ques 26
+
+
+ALTER TABLE 
+Student
+ADD         COLUMN mobile_no
+varchar(10) NOT NULL DEFAULT '9999999999'
+
+
+  
+
+
+
+Ques 27
+
+
+SELECT * 
+FROM Student
+WHERE dob < DATE_SUB(CURDATE(), INTERVAL 20 YEAR);
+
+
+  
+
+
+
+
+
+Ques 28
+
+
+SELECT
+        *
+FROM
+        Student
+WHERE
+        DATE(dob) BETWEEN '2001-01-01' AND '2001-12-31'
+        AND roll_no IN (
+            SELECT
+                roll_no
+            FROM
+                Enrollment
+            GROUP BY
+                roll_no
+            HAVING
+                count(roll_no) >= 1
+        )
+
+
+
+
+  
+
+
+
+Ques 29
+
+
+select count(*)
+From soc_name_total_students
+Where total_students >= 5
+and soc_name like “S%I”;
+
+
+  
+
+
+
+Ques 30
+
+
+SELECT
+        soc_name,
+        mentor_name,
+        total_seats count(sid) AS total_enrolled,
+        (total_seats - count(sid)) AS unfilled_seats,
+FROM
+        Society
+        LEFT JOIN Enrollment ON sid = soc_id
+GROUP BY
+        sid
